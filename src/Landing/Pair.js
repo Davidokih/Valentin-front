@@ -2,20 +2,21 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 import PairedUser from './PairedUser';
 
 const Pair = () => {
 
-  const { id } = useParams();
+  // const { id } = useParams();
   const [ pairName, setPair ] = useState({});
   const user = useSelector((state) => state.namePair);
   // console.log(id);
-  const URL = "http://localhost:1111/api/user";
+  const URL = "http://localhost:1111";
+  const webURL = "https://valentian-app.onrender.com";
 
   const pairUser = () => {
 
-    axios.patch(`${URL}/${id}/pair`).then((res) => {
+    axios.patch(`${webURL}/api/user/${user._id}/pair`).then((res) => {
 
       setPair(res.data);
       alert(res.data.message);
@@ -27,7 +28,7 @@ const Pair = () => {
 
   const getPair = () => {
 
-    axios.get(`${URL}/${id}`,).then((res) => {
+    axios.get(`${webURL}/api/user/${pairName._id}`).then((res) => {
       // console.log(res.data);
       setPair(res.data.data);
     }).catch((err) => {
@@ -40,7 +41,7 @@ const Pair = () => {
     getPair();
   }, []);
 
-  // console.log(pairName);
+  console.log(pairName);
 
   return (
     <div>
@@ -49,7 +50,7 @@ const Pair = () => {
           🤍🤍🤍🤍
           <Name>{ pairName.name }</Name>
           <span>you are paired to</span>
-          <Name1><PairedUser pairName={ pairName.pair[ 0 ] } pairWith /></Name1>
+          <Name1><PairedUser pairName={ pairName.pair[ 0 ] } pair={ pairName } pairWith /></Name1>
           🤍🤍🤍🤍
         </Card>
         <button onClick={ pairUser }>Pair</button>

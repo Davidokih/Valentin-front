@@ -2,10 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import Private from "./Private";
 
 const Header = () => {
 
-  const user = useSelector((state) => state.namePair);
+  // const user = useSelector((state) => state.namePair);
   // console.log(user._id);
   return (
     <div>
@@ -14,9 +15,11 @@ const Header = () => {
           <Logo>
             <img src='/image/logo.png' alt='' />
           </Logo>
-          <But to={ `pairing/${user._id}` }>
-            <button>My pair</button>
-          </But>
+          <Private>
+            <But to={ `/pairing` }>
+              <button>My pair</button>
+            </But>
+          </Private>
         </Wrapper>
       </Container>
     </div>

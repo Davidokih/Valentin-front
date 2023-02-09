@@ -10,10 +10,11 @@ const home = () => {
 
   const [ name, setName ] = useState("");
   const dispatch = useDispatch();
-  const URL = "http://localhost:1111/api/user";
+  const URL = "http://localhost:1111";
+  const webURL = "https://valentian-app.onrender.com";
 
   const handleSubmit = () => {
-    axios.post(`${URL}/create`, { name: name }).then((res) => {
+    axios.post(`${webURL}/api/user/create`, { name: name }).then((res) => {
 
       dispatch(createUser(res.data.data));
       console.log(res.data.data);
@@ -30,12 +31,12 @@ const home = () => {
   };
 
 
-  useEffect(() => {
-    axios.get(`${URL}/get`).then((res) => {
-      console.log(res);
-    });
-    // console.log(pair);
-  }, []);
+  // useEffect(() => {
+  //   axios.get(`${URL}/get`).then((res) => {
+  //     console.log(res);
+  //   });
+  // console.log(pair);
+  // }, []);
 
   return (
     <div>

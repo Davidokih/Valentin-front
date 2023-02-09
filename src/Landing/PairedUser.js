@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+// import { useParams } from 'react-router-dom';
 
-const PairedUser = ({ pairName }) => {
+const PairedUser = ({ pairName, pair }) => {
 
     const [ pairedData, setPairedWith ] = useState({});
 
-    const { id } = useParams();
-    const URL = "http://localhost:1111/api/user";
+    const user = useSelector((state) => state.namePair);
+    const URL = "http://localhost:1111";
+    const webURL = "https://valentian-app.onrender.com";
     // const userID = pairName;
     const getPairUser = () => {
-        axios.get(`${URL}/${id}/${pairName}`).then((res) => {
+        axios.get(`${webURL}/api/user/${pair._id}/${pairName}`).then((res) => {
             console.log(res.data);
             setPairedWith(res.data.data);
         }).catch((err) => {
